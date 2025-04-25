@@ -1,0 +1,150 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: #333;
+}
+
+
+.nav-list {
+    background: linear-gradient(to right, #4b6cb7, #182848);
+    color: white;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.heading h2 {
+    margin: 0;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+#ftc-btn, #refresh-btn {
+    background-color: #4b6cb7;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+#ftc-btn:hover, #refresh-btn:hover {
+    background-color: #3a56a0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+#ftc-btn:active, #refresh-btn:active {
+    transform: translateY(0);
+}
+
+.shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        left: 100%;
+    }
+}
+
+
+.progress-loader {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background: linear-gradient(to right, #4b6cb7, #182848);
+    transition: width 0.3s ease;
+}
+
+
+#userList {
+    list-style-type: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1rem;
+}
+
+#userList li {
+    background: white;
+    padding: 1.2rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: left;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+#userList li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #4b6cb7, #182848);
+}
+
+#userList li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#userList li {
+    animation: fadeIn 0.4s ease forwards;
+    opacity: 0;
+}
+
+#userList li:nth-child(1) { animation-delay: 0.5s; }
+#userList li:nth-child(2) { animation-delay: 1s; }
+#userList li:nth-child(3) { animation-delay: 1.5s; }
+#userList li:nth-child(4) { animation-delay: 2.0s; }
+#userList li:nth-child(5) { animation-delay: 2.5s; }
+#userList li:nth-child(6) { animation-delay: 3.0s; }
+#userList li:nth-child(7) { animation-delay: 3.5s; }
+#userList li:nth-child(8) { animation-delay: 4.0s; }
+#userList li:nth-child(9) { animation-delay: 4.5s; }
+#userList li:nth-child(10) { animation-delay: 5.0s; }
