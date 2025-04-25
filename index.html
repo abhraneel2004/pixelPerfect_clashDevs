@@ -4,11 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Data</title>
+    <style>
+        .userList {}
+    </style>
 </head>
 
 <body>
-    Sample page
+    <nav>
+        <div>
+            User Data
+        </div>
+    </nav>
+    <section>
+        <button type="button" onclick="fetchName()">Fetch Names</button>
+    </section>
+    <section>
+        <ul id="userList">
+            <li id="item1">Name1</li>
+            <li id="item2">Name2</li>
+            <li id="item3">Name3</li>
+            <li id="item4">Name4</li>
+            <li id="item5">Name5</li>
+            <li id="item6">Name6</li>
+            <li id="item7">Name7</li>
+            <li id="item8">Name8</li>
+            <li id="item9">Name9</li>
+            <li id="item10">Name10</li>
+        </ul>
+    </section>
+
 </body>
 
 </html>
+<script>
+    function fetchName() {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            }).then(res => renderData(res))
+            .catch(error => console.error('There was a problem with the fetch operation:', error));
+        // console.log(Names);
+
+    }
+    function renderData(data1) {
+        console.log(typeof data1);
+        for (let i = 0; i < data1.length; i++) {
+            console.log(data1[i].name);
+            document.getElementById("item"+(i+1)).innerHTML = data1[i].name;
+        }
+    }
+
+
+</script>
