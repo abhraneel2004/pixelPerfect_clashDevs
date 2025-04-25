@@ -27,52 +27,63 @@ function fetchName() {
 }
 
 let time_count = 5000;
+let tries_left = 3;
 function refreshData() {
-    const refreshBtn = document.getElementById('refresh-btn');
-    const progressLoader = refreshBtn.querySelector('.progress-loader');
-    
-    refreshBtn.classList.add('shimmer');
-    refreshBtn.disabled = true;
-    progressLoader.style.width = '0';
-    
-    
-    
-    let progress = 0;
-    const progressInterval = setInterval(() => {
-        progress += 5;
-        progressLoader.style.width = `${progress}%`;
-        if (progress >= 100) {
-            clearInterval(progressInterval);
-        }
-    }, 100);
-    
-    fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Network response was not ok');
+    if (tries_left>0){
+        console.log("Tries left: "+tries_left);
+        alert("Tries Left: "+tries_left);
+        const refreshBtn = document.getElementById('refresh-btn');
+        const progressLoader = refreshBtn.querySelector('.progress-loader');
+        
+        refreshBtn.classList.add('shimmer');
+        refreshBtn.disabled = true;
+        progressLoader.style.width = '0';
+        
+        
+        
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            progress += 5;
+            progressLoader.style.width = `${progress}%`;
+            if (progress >= 100) {
+                clearInterval(progressInterval);
             }
-        })
-        .then(res => {
-            
-            progressLoader.style.width = '100%';
-            setTimeout(() => {
-                renderData(res);
+        }, 100);
+        
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .then(res => {
+                
+                progressLoader.style.width = '100%';
+                setTimeout(() => {
+                    renderData(res);
+                    refreshBtn.classList.remove('shimmer');
+                    refreshBtn.disabled = false;
+                    progressLoader.style.width = '0';
+                }, time_count);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
                 refreshBtn.classList.remove('shimmer');
                 refreshBtn.disabled = false;
                 progressLoader.style.width = '0';
-            }, time_count);
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-            refreshBtn.classList.remove('shimmer');
-            refreshBtn.disabled = false;
-            progressLoader.style.width = '0';
-            clearInterval(progressInterval);
-        });
-        time_count*=2;
-        console.log(time_count);
+                clearInterval(progressInterval);
+            });
+            time_count*=2;
+            console.log(time_count);
+            tries_left-=1;
+    }
+    else{
+        alert('All retries expired. Refresh the page to continue');
+        return;
+    }
+    
 }
 
 function renderData(data1) {
@@ -94,4 +105,5 @@ function renderData(data1) {
         item.style.animation = 'fadeIn 0.4s ease forwards';
         item.style.animationDelay = `${(i+1)*0.1}s`;
     }
+    console.log("render complete");
 }
